@@ -23,8 +23,16 @@ MuseScore {
     // Small note name size is fraction of the full font size.
     property real fontSizeMini: 0.7
 
-    function nameChord(notes, text, small, movableDoOffset) {
-        var movableDo = ['d', 'di', 'r', 'ri', 'm', 'f', 'fi', 's', 'si', 'l', 'ta', 't']
+    function nameChord(notes, text, small, movableDoOffset, notationIndex) {
+        var movableDo = []
+        switch (notationIndex) {
+        case 0:
+            movableDo = ['d', 'di', 'r', 'ri', 'm', 'f', 'fi', 's', 'si', 'l', 'ta', 't']
+            break
+        case 1:
+            movableDo = ['ド', 'ド♯', 'レ', 'レ♯', 'ミ', 'ファ', 'ファ♯', 'ソ', 'ソ♯', 'ラ', 'ラ♯', 'シ']
+            break
+        }
         var tpc2pitch = {
             "31": 11,
             "24": 10,
@@ -78,7 +86,8 @@ MuseScore {
             if (typeof notes[i].tpc === "undefined")
                 // like for grace notes ?!?
                 return
-            name = movableDo[(tpc2pitch[notes[i].tpc] - movableDoOffset + movableDo.length) % movableDo.length]
+            name = movableDo[(tpc2pitch[notes[i].tpc] - movableDoOffset
+                              + movableDo.length) % movableDo.length]
 
             text.text = name + oct + text.text
         }
@@ -113,7 +122,7 @@ MuseScore {
         return text
     }
 
-    function nameNotesMovableDo(tonalityText) {
+    function nameNotesMovableDo(tonalityText, notationIndex) {
         var tonalityToMovableDoOffset = {
             "C-Dur / a-moll": 0,
             "G-Dur / e-moll": 7,
@@ -201,7 +210,8 @@ MuseScore {
 
                         // Now handle the note names on the main chord...
                         var notes = cursor.element.notes
-                        nameChord(notes, text, false, movableDoOffset)
+                        nameChord(notes, text, false, movableDoOffset,
+                                  notationIndex)
                         if (text.text)
                             cursor.add(text)
 
@@ -238,8 +248,8 @@ MuseScore {
         height: form.height
         contentItem: Rectangle {
             id: form
-            width: exporterColumn.width + 20
-            height: exporterColumn.height + 20
+            width: exporterColumn.width + 30
+            height: exporterColumn.height + 30
             color: "lightgray"
             ColumnLayout {
                 id: exporterColumn
@@ -248,16 +258,28 @@ MuseScore {
                     columns: 1
                     anchors.fill: parent
                     anchors.margins: 10
+                    Label {
+                        text: qsTr('調性')
+                    }
                     ComboBox {
                         id: tonality
                         model: ["C-Dur / a-moll", "G-Dur / e-moll", "D-Dur / h-moll", "A-Dur / fis-moll", "E-Dur / cis-moll", "H-Dur / gis-moll", "Fis-Dur / dis-moll", "Cis-Dur / ais-moll", "F-Dur / d-moll", "B-Dur / g-moll", "Es-Dur / c-moll", "As-Dur / f-moll", "Des-Dur / b-moll", "Ges-Dur / es-moll", "Ces-Dur / as-moll"]
                     }
+                    Label {
+                        text: qsTr('表記')
+                    }
+                    ComboBox {
+                        id: notation
+                        model: ["d r m", "ド レ ミ"]
+                    }
                     Button {
                         id: button
-                        text: qsTr("Select")
+                        text: qsTr("決定")
                         onClicked: {
                             curScore.startCmd()
-                            nameNotesMovableDo(tonality.currentText)
+                            console.log(notation.currentIndex)
+                            nameNotesMovableDo(tonality.currentText,
+                                               notation.currentIndex)
                             curScore.endCmd()
                             tonalityDialog.visible = false
                             Qt.quit()
