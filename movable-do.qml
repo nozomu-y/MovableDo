@@ -117,6 +117,9 @@ MuseScore {
             var tonalPitch = tpcToTonalPitch[String((parseInt(notes[i].tpc) - movableDoOffset + 35 + 1) % 35 - 1)]
             name = tonalPitchToMovableDo[tonalPitch][notationIndex]
 
+            if (notes[i].tieBack !== null) 
+                // skip if the note is tied
+                continue
             text.text = name + oct + text.text
         }
     }
