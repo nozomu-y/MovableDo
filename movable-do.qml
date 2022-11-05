@@ -16,7 +16,7 @@ import QtQuick.Dialogs 1.2
 import MuseScore 3.0
 
 MuseScore {
-    version: "1.2"
+    version: "1.3"
     description: "This plugin inserts movable do texts derived from the given tonality"
     menuPath: "Plugins.MovableDo"
 
