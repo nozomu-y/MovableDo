@@ -16,7 +16,7 @@ import QtQuick.Dialogs 1.2
 import MuseScore 3.0
 
 MuseScore {
-    version: "1.1"
+    version: "1.2"
     description: "This plugin inserts movable do texts derived from the given tonality"
     menuPath: "Plugins.MovableDo"
 
@@ -86,8 +86,7 @@ MuseScore {
             if (typeof notes[i].tpc === "undefined")
                 // like for grace notes ?!?
                 return
-            name = movableDo[(tpc2pitch[notes[i].tpc] - movableDoOffset
-                              + movableDo.length) % movableDo.length]
+            name = movableDo[tpc2pitch[String((parseInt(notes[i].tpc) - movableDoOffset + 35 + 1) % 35 - 1)]]
 
             text.text = name + oct + text.text
         }
@@ -125,20 +124,20 @@ MuseScore {
     function nameNotesMovableDo(tonalityText, notationIndex) {
         var tonalityToMovableDoOffset = {
             "C-Dur / a-moll": 0,
-            "G-Dur / e-moll": 7,
+            "G-Dur / e-moll": 1,
             "D-Dur / h-moll": 2,
-            "A-Dur / fis-moll": 9,
+            "A-Dur / fis-moll": 3,
             "E-Dur / cis-moll": 4,
-            "H-Dur / gis-moll": -1,
+            "H-Dur / gis-moll": 5,
             "Fis-Dur / dis-moll": 6,
-            "Cis-Dur / ais-moll": 1,
-            "F-Dur / d-moll": 5,
+            "Cis-Dur / ais-moll": 7,
+            "F-Dur / d-moll": -1,
             "B-Dur / g-moll": -2,
-            "Es-Dur / c-moll": 3,
+            "Es-Dur / c-moll": -3,
             "As-Dur / f-moll": -4,
-            "Des-Dur / b-moll": 1,
-            "Ges-Dur / es-moll": 6,
-            "Ces-Dur / as-moll": -1
+            "Des-Dur / b-moll": -5,
+            "Ges-Dur / es-moll": -6,
+            "Ces-Dur / as-moll": -7
         }
         var movableDoOffset = tonalityToMovableDoOffset[tonalityText]
         var cursor = curScore.newCursor()
