@@ -24,51 +24,79 @@ MuseScore {
     property real fontSizeMini: 0.7
 
     function nameChord(notes, text, small, movableDoOffset, notationIndex) {
-        var movableDo = []
-        switch (notationIndex) {
-        case 0:
-            movableDo = ['d', 'di', 'ro', 'r', 'ri', 'ma', 'm', 'f', 'fi', 'se', 's', 'si', 'lo', 'l', 'li', 'ta', 't']
-            break
-        case 1:
-            movableDo = ['ド', 'ド♯','レ♭', 'レ', 'レ♯', 'ミ♭', 'ミ', 'ファ', 'ファ♯','ソ♭', 'ソ', 'ソ♯','ラ♭', 'ラ', 'ラ♯','シ♭', 'シ']
-            break
+        var tpcToTonalPitch= {
+            "31": "A##",
+            "19": "B",
+            "7":  "Cb",
+            "24": "A#",
+            "12": "Bb",
+            "0":  "Cbb",
+            "29": "G##",
+            "17": "A",
+            "5":  "Bbb",
+            "22": "G#",
+            "10": "Ab",
+            "27": "F##",
+            "15": "G",
+            "3":  "Abb",
+            "32": "E##",
+            "20": "F#",
+            "8":  "Gb",
+            "25": "E#",
+            "13": "F",
+            "1":  "Gbb",
+            "30": "D##",
+            "18": "E",
+            "6":  "Fb",
+            "23": "D#",
+            "11": "Eb",
+            "-1": "Fbb",
+            "28": "C##",
+            "16": "D",
+            "4":  "Ebb",
+            "33": "B##",
+            "21": "C#",
+            "9": "Db",
+            "26": "B#",
+            "14": "C",
+            "2":  "Dbb"
         }
-        var tpc2pitch = {
-            "31": 16,
-            "24": 14,
-            "29": 13,
-            "22": 11,
-            "27": 10,
-            "32": 8,
-            "25": 7,
-            "30": 6,
-            "23": 4,
-            "28": 3,
-            "33": 1,
-            "26": 0,
-            "19": 16,
-            "12": 15,
-            "17": 13,
-            "15": 10,
-            "20": 8,
-            "13": 7,
-            "18": 6,
-            "11": 5,
-            "16": 3,
-            "21": 1,
-            "14": 0,
-            "7": 16,
-            "0": 15,
-            "5": 13,
-            "10": 12,
-            "3": 10,
-            "8": 9,
-            "1": 7,
-            "6": 6,
-            "4": 3,
-            "-1": 5,
-            "9": 2,
-            "2": 0
+        var tonalPitchToMovableDo = {
+            'A##': ['t',  'シ'],
+            'A#':  ['li', 'ラ♯'],
+            'G##': ['l',  'ラ'],
+            'G#':  ['si', 'ソ♯'],
+            'F##': ['s',  'ソ'],
+            'E##': ['fi', 'ファ♯'],
+            'E#':  ['f',  'ファ'],
+            'D##': ['m',  'ミ'],
+            'D#':  ['ri', 'レ♯'],
+            'C##': ['r',  'レ'],
+            'B##': ['di', 'ド♯'],
+            'B#':  ['d',  'ド'],
+            'B':   ['t',  'シ'],
+            'Bb':  ['ta', 'シ♭'],
+            'A':   ['l',  'ラ'],
+            'G':   ['s',  'ソ'],
+            'F#':  ['fi', 'ファ♯'],
+            'F':   ['f',  'ファ'],
+            'E':   ['m',  'ミ'],
+            'Eb':  ['ma', 'ミ♭'],
+            'D':   ['r',  'レ'],
+            'C#':  ['di', 'ド♯'],
+            'C':   ['d',  'ド'],
+            'Cb':  ['t',  'シ'],
+            'Cbb': ['ta', 'シ♭'],
+            'Bbb': ['l',  'ラ'],
+            'Ab':  ['lo', 'ラ♭'],
+            'Abb': ['s',  'ソ'],
+            'Gb':  ['se', 'ソ♭'],
+            'Gbb': ['f',  'ファ'],
+            'Fb':  ['m',  'ミ'],
+            'Ebb': ['r',  'レ'],
+            'Fbb': ['ma', 'ミ♭'],
+            'Db':  ['ro', 'レ♭'],
+            'Dbb': ['d',  'ド'],
         }
         var sep = "\n"
         // change to "," if you want them horizontally (anybody?)
@@ -86,7 +114,8 @@ MuseScore {
             if (typeof notes[i].tpc === "undefined")
                 // like for grace notes ?!?
                 return
-            name = movableDo[tpc2pitch[String((parseInt(notes[i].tpc) - movableDoOffset + 35 + 1) % 35 - 1)]]
+            var tonalPitch = tpcToTonalPitch[String((parseInt(notes[i].tpc) - movableDoOffset + 35 + 1) % 35 - 1)]
+            name = tonalPitchToMovableDo[tonalPitch][notationIndex]
 
             text.text = name + oct + text.text
         }
