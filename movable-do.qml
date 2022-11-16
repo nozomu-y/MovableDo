@@ -124,7 +124,7 @@ MuseScore {
         }
     }
 
-    function renderGraceNoteNames(cursor, list, text, small) {
+    function renderGraceNoteNames(cursor, list, text, small, movableDoOffset, notationIndex) {
         if (list.length > 0) {
             // Check for existence.
             // Now render grace note's names...
@@ -132,7 +132,7 @@ MuseScore {
                 // iterate through all grace chords
                 var chord = list[chordNum]
                 // Set note text, grace notes are shown a bit smaller
-                nameChord(chord.notes, text, small)
+                nameChord(chord.notes, text, small, movableDoOffset, notationIndex)
                 if (text.text)
                     cursor.add(text)
                 // X position the note name over the grace chord
@@ -237,7 +237,7 @@ MuseScore {
 
                         // Next process the leading grace notes, should they exist...
                         text = renderGraceNoteNames(cursor, leadingLifo,
-                                                    text, true)
+                                                    text, true, movableDoOffset, notationIndex)
 
                         // Now handle the note names on the main chord...
                         var notes = cursor.element.notes
@@ -259,7 +259,7 @@ MuseScore {
 
                         // Finally process trailing grace notes if they exist...
                         text = renderGraceNoteNames(cursor, trailingFifo,
-                                                    text, true)
+                                                    text, true, movableDoOffset, notationIndex)
                     } // end if CHORD
                     cursor.next()
                 } // end while segment
