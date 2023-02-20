@@ -16,7 +16,7 @@ import QtQuick.Dialogs 1.2
 import MuseScore 3.0
 
 MuseScore {
-    version: "1.3"
+    version: "1.4"
     description: "This plugin inserts movable do texts derived from the given tonality"
     menuPath: "Plugins.MovableDo"
 
@@ -155,21 +155,37 @@ MuseScore {
 
     function nameNotesMovableDo(tonalityText, notationIndex) {
         var tonalityToMovableDoOffset = {
-            "C-Dur / a-moll": 0,
-            "G-Dur / e-moll": 1,
-            "D-Dur / h-moll": 2,
-            "A-Dur / fis-moll": 3,
-            "E-Dur / cis-moll": 4,
-            "H-Dur / gis-moll": 5,
-            "Fis-Dur / dis-moll": 6,
-            "Cis-Dur / ais-moll": 7,
-            "F-Dur / d-moll": -1,
-            "B-Dur / g-moll": -2,
-            "Es-Dur / c-moll": -3,
-            "As-Dur / f-moll": -4,
-            "Des-Dur / b-moll": -5,
-            "Ges-Dur / es-moll": -6,
-            "Ces-Dur / as-moll": -7
+            "C-Dur": 0,
+            "G-Dur": 1,
+            "D-Dur": 2,
+            "A-Dur": 3,
+            "E-Dur": 4,
+            "H-Dur": 5,
+            "Fis-Dur": 6,
+            "Cis-Dur": 7,
+            "F-Dur": -1,
+            "B-Dur": -2,
+            "Es-Dur": -3,
+            "As-Dur": -4,
+            "Des-Dur": -5,
+            "Ges-Dur": -6,
+            "Ces-Dur": -7,
+
+            "C-Dur": 0,
+            "G-Dur": 1,
+            "D-Dur": 2,
+            "A-Dur": 3,
+            "E-Dur": 4,
+            "H-Dur": 5,
+            "Fis-Dur": 6,
+            "Cis-Dur": 7,
+            "F-Dur": -1,
+            "B-Dur": -2,
+            "Es-Dur": -3,
+            "As-Dur": -4,
+            "Des-Dur": -5,
+            "Ges-Dur": -6,
+            "Ces-Dur": -7
         }
         var movableDoOffset = tonalityToMovableDoOffset[tonalityText]
         var cursor = curScore.newCursor()
@@ -265,6 +281,16 @@ MuseScore {
                 } // end while segment
             } // end for voice
         } // end for staff
+
+        cursor.rewind(1)
+        cursor.voice = 0
+        cursor.staffIdx = startStaff
+        if (fullScore)
+            cursor.rewind(0)
+        var text = newElement(Element.SYSTEM_TEXT)
+        text.text = tonalityText
+        text.fontSize *= 1.5
+        cursor.add(text)
     }
 
     onRun: {
@@ -294,7 +320,10 @@ MuseScore {
                     }
                     ComboBox {
                         id: tonality
-                        model: ["C-Dur / a-moll", "G-Dur / e-moll", "D-Dur / h-moll", "A-Dur / fis-moll", "E-Dur / cis-moll", "H-Dur / gis-moll", "Fis-Dur / dis-moll", "Cis-Dur / ais-moll", "F-Dur / d-moll", "B-Dur / g-moll", "Es-Dur / c-moll", "As-Dur / f-moll", "Des-Dur / b-moll", "Ges-Dur / es-moll", "Ces-Dur / as-moll"]
+                        model: [
+                            "C-Dur", "G-Dur", "D-Dur", "A-Dur", "E-Dur", "H-Dur", "Fis-Dur", "Cis-Dur", "F-Dur", "B-Dur", "Es-Dur", "As-Dur", "Des-Dur", "Ges-Dur", "Ces-Dur",
+                            "a-moll", "e-moll", "h-moll", "fis-moll", "cis-moll", "gis-moll", "dis-moll", "ais-moll", "d-moll", "g-moll", "c-moll", "f-moll", "b-moll", "es-moll", "as-moll",
+                        ]
                     }
                     Label {
                         text: qsTr('表記')
