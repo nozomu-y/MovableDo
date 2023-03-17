@@ -171,21 +171,21 @@ MuseScore {
             "Ges-Dur": -6,
             "Ces-Dur": -7,
 
-            "C-Dur": 0,
-            "G-Dur": 1,
-            "D-Dur": 2,
-            "A-Dur": 3,
-            "E-Dur": 4,
-            "H-Dur": 5,
-            "Fis-Dur": 6,
-            "Cis-Dur": 7,
-            "F-Dur": -1,
-            "B-Dur": -2,
-            "Es-Dur": -3,
-            "As-Dur": -4,
-            "Des-Dur": -5,
-            "Ges-Dur": -6,
-            "Ces-Dur": -7
+            "a-moll": 0,
+            "e-moll": 1,
+            "h-moll": 2,
+            "fis-moll": 3,
+            "cis-moll": 4,
+            "gis-moll": 5,
+            "dis-moll": 6,
+            "ais-moll": 7,
+            "d-moll": -1,
+            "g-moll": -2,
+            "c-moll": -3,
+            "f-moll": -4,
+            "b-moll": -5,
+            "es-moll": -6,
+            "as-moll": -7
         }
         var movableDoOffset = tonalityToMovableDoOffset[tonalityText]
         var cursor = curScore.newCursor()
@@ -322,7 +322,7 @@ MuseScore {
                         id: tonality
                         model: [
                             "C-Dur", "G-Dur", "D-Dur", "A-Dur", "E-Dur", "H-Dur", "Fis-Dur", "Cis-Dur", "F-Dur", "B-Dur", "Es-Dur", "As-Dur", "Des-Dur", "Ges-Dur", "Ces-Dur",
-                            "a-moll", "e-moll", "h-moll", "fis-moll", "cis-moll", "gis-moll", "dis-moll", "ais-moll", "d-moll", "g-moll", "c-moll", "f-moll", "b-moll", "es-moll", "as-moll",
+                            "a-moll", "e-moll", "h-moll", "fis-moll", "cis-moll", "gis-moll", "dis-moll", "ais-moll", "d-moll", "g-moll", "c-moll", "f-moll", "b-moll", "es-moll", "as-moll"
                         ]
                     }
                     Label {
