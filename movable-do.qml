@@ -16,9 +16,16 @@ import QtQuick.Dialogs 1.2
 import MuseScore 3.0
 
 MuseScore {
+
     version: "1.4"
     description: "This plugin inserts movable do texts derived from the given tonality"
     menuPath: "Plugins.MovableDo"
+
+    Component.onCompleted: {
+        if (mscoreMajorVersion >= 4) {
+            title = "Movable Do";
+        }
+    }
 
     // Small note name size is fraction of the full font size.
     property real fontSizeMini: 0.7
@@ -307,7 +314,7 @@ MuseScore {
             id: form
             width: exporterColumn.width + 30
             height: exporterColumn.height + 30
-            color: "lightgray"
+            color: (mscoreMajorVersion < 4? "lightgray" : "#F5F5F6")
             ColumnLayout {
                 id: exporterColumn
                 GridLayout {
@@ -342,7 +349,7 @@ MuseScore {
                                                notation.currentIndex)
                             curScore.endCmd()
                             tonalityDialog.visible = false
-                            Qt.quit()
+                            return
                         }
                     }
                 }
