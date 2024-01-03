@@ -314,7 +314,7 @@ MuseScore {
             id: form
             width: exporterColumn.width + 30
             height: exporterColumn.height + 30
-            color: (mscoreMajorVersion < 4? "lightgray" : "#F5F5F6")
+            color: (mscoreMajorVersion < 4 ? "lightgray" : "#F5F5F6")
             ColumnLayout {
                 id: exporterColumn
                 GridLayout {
