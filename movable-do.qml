@@ -14,8 +14,10 @@ import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
 import MuseScore 3.0
+import MuseScore.UiComponents 1.0
 
 MuseScore {
+    id: root
 
     version: "1.4"
     description: "This plugin inserts movable do texts derived from the given tonality"
@@ -26,6 +28,9 @@ MuseScore {
             title = "Movable Do";
         }
     }
+
+    property int tonalityIndex: -1
+    property int notationIndex: -1
 
     // Small note name size is fraction of the full font size.
     property real fontSizeMini: 0.7
