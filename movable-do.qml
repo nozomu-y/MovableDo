@@ -8,8 +8,8 @@
 //  License: http://www.gnu.org/licenses/gpl.html GPL version 2 or higher
 //=============================================================================
 
-import QtQuick 2.2
-import QtQuick.Controls 1.1
+import QtQuick 2.9
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
@@ -17,6 +17,7 @@ import MuseScore 3.0
 import MuseScore.UiComponents 1.0
 
 MuseScore {
+  
     id: root
 
     version: "1.4"
@@ -330,21 +331,29 @@ MuseScore {
                     Label {
                         text: qsTr('調性')
                     }
-                    ComboBox {
+                    StyledDropdown {
                         id: tonality
                         model: [
                             "C-Dur", "G-Dur", "D-Dur", "A-Dur", "E-Dur", "H-Dur", "Fis-Dur", "Cis-Dur", "F-Dur", "B-Dur", "Es-Dur", "As-Dur", "Des-Dur", "Ges-Dur", "Ces-Dur",
                             "a-moll", "e-moll", "h-moll", "fis-moll", "cis-moll", "gis-moll", "dis-moll", "ais-moll", "d-moll", "g-moll", "c-moll", "f-moll", "b-moll", "es-moll", "as-moll"
                         ]
+                        currentIndex: root.tonalityIndex
+                        onActivated: function(index) {
+                            root.tonalityIndex = index
+                        }
                     }
                     Label {
                         text: qsTr('表記')
                     }
-                    ComboBox {
+                    StyledDropdown {
                         id: notation
                         model: ["d r m", "ド レ ミ"]
+                        currentIndex: root.notationIndex
+                        onActivated: function(index) {
+                            root.notationIndex = index
+                        }
                     }
-                    Button {
+                    FlatButton {
                         id: button
                         text: qsTr("決定")
                         onClicked: {
@@ -354,7 +363,7 @@ MuseScore {
                                                notation.currentIndex)
                             curScore.endCmd()
                             tonalityDialog.visible = false
-                            return
+                            quit()
                         }
                     }
                 }
