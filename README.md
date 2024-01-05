@@ -4,9 +4,18 @@
 
 ## インストール
 
-`movable-do.qml` を[ダウンロード](https://github.com/nozomu-y/MovableDo/releases/download/v1.4/movable-do.qml)し、[MuseScore のハンドブック](https://musescore.org/ja/%E3%83%8F%E3%83%B3%E3%83%89%E3%83%96%E3%83%83%E3%82%AF/furakuin#installation)を参考にインストールしてください。
+### MuseScore 3
 
-MuseScore 4 での導入の際は、「プラグイン」フォルダ内に**更にもう一階層フォルダを作成**し、その中に `movable-do.qml` を移動してください。
+Movable Do (v1.5) をダウンロードし、[MuseScore 3 Handbook](https://musescore.org/ja/%E3%83%8F%E3%83%B3%E3%83%89%E3%83%96%E3%83%83%E3%82%AF/furakuin#installation)を参考にインストールしてください。
+
+Movable Do (v1.5) : [`movable-do.qml`](https://github.com/nozomu-y/MovableDo/releases/download/v1.5/movable-do.qml)
+
+### MuseScore 4
+
+Movable Do (v2.0) をダウンロードし、[MuseScore 4 Handbook](https://musescore.org/en/handbook/4/plugins)を参考にインストールしてください。  
+基本的な手順は MuseScore 3 と同じですが、 MuseScore 4 での導入の際は「プラグイン」フォルダ内に**更にもう一階層フォルダを作成**し、その中に `movable-do.qml` を設置してください。
+
+Movable Do (v2.0) : [`movable-do.qml`](https://github.com/nozomu-y/MovableDo/releases/download/v2.0/movable-do.qml)
 
 ## デモ
 
