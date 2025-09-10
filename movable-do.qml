@@ -7,14 +7,12 @@
 //
 //  License: http://www.gnu.org/licenses/gpl.html GPL version 2 or higher
 //=============================================================================
-
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
 
 import MuseScore 3.0
-import MuseScore.UiComponents 1.0
+import Muse.UiComponents 1.0
 
 MuseScore {
   
@@ -24,8 +22,16 @@ MuseScore {
     description: "This plugin inserts movable do texts derived from the given tonality"
     menuPath: "Plugins.MovableDo"
 
+    pluginType: "dialog"
+
+    requiresScore: true
+
+    width: exporterColumn.width + 30
+    height: exporterColumn.height + 30
+
+    //4.4 title: "Movable Do"
     Component.onCompleted: {
-        if (mscoreMajorVersion >= 4) {
+        if (mscoreMajorVersion >= 4 && mscoreMinorVersion <= 3) {
             title = "Movable Do";
         }
     }
@@ -310,13 +316,10 @@ MuseScore {
         console.log("Running Movable Do")
     } // end onRun
 
-    Dialog {
+    Item {
         id: tonalityDialog
-        visible: true
-        title: qsTr("Movable Do")
-        width: form.width
-        height: form.height
-        contentItem: Rectangle {
+        anchors.fill: parent
+        Rectangle {
             id: form
             width: exporterColumn.width + 30
             height: exporterColumn.height + 30
