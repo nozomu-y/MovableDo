@@ -18,7 +18,7 @@ MuseScore {
   
     id: root
 
-    version: "2.0"
+    version: "2.1"
     description: "This plugin inserts movable do texts derived from the given tonality"
     menuPath: "Plugins.MovableDo"
 
