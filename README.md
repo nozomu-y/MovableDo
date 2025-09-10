@@ -12,10 +12,10 @@ Movable Do (v1.5) : [`movable-do.qml`](https://github.com/nozomu-y/MovableDo/rel
 
 ### MuseScore 4
 
-Movable Do (v2.0) をダウンロードし、[MuseScore 4 Handbook](https://musescore.org/en/handbook/4/plugins)を参考にインストールしてください。  
+Movable Do (v2.1) をダウンロードし、[MuseScore 4 Handbook](https://musescore.org/en/handbook/4/plugins)を参考にインストールしてください。  
 基本的な手順は MuseScore 3 と同じですが、 MuseScore 4 での導入の際は「プラグイン」フォルダ内に**更にもう一階層フォルダを作成**し、その中に `movable-do.qml` を設置してください。
 
-Movable Do (v2.0) : [`movable-do.qml`](https://github.com/nozomu-y/MovableDo/releases/download/v2.0/movable-do.qml)
+Movable Do (v2.1) : [`movable-do.qml`](https://github.com/nozomu-y/MovableDo/releases/download/v2.1/movable-do.qml)
 
 ## デモ
 
